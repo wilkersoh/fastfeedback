@@ -1,38 +1,54 @@
-import Head from 'next/head'
-import { useAuth } from '../lib/auth'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import NextLink from 'next/link';
+import { useAuth } from '@/lib/auth';
+
+import {
+  Button,
+  Box,
+  Code,
+  Text,
+  Icon,
+  Heading,
+  Flex,
+  Link
+} from '@chakra-ui/core';
 
 export default function Home() {
   const auth = useAuth();
-  console.log(auth)
   return (
-    <div className={styles.container}>
+    <Flex as="main" m="auto">
       <Head>
-        <title>Create Next App</title>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+          if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
+            window.location.href = "/dashboard"
+          }
+        `
+          }}
+        />
+
+        <title>Fast Feedback</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        <button onClick={(e) => auth.signinWithGithub()}>Sign in</button>
-        <span>{auth?.user?.email}</span>
-        {auth?.user && (
-          <button onClick={(e) => auth.signout()}>Sign out</button>
+      <Box as="main" textAlign="center">
+        <Heading>Fast Feedback</Heading>
+        <Icon name="logo" size="64px" />
+        <Text>
+          Current user: <Code>{auth.user ? auth.user.email : 'None'}</Code>
+        </Text>
+        {auth.user ? (
+          <>
+            <Button onClick={(e) => auth.signout()}>Sign Out</Button>
+            <NextLink href="/dashboard" passHref>
+              <Link>View Dashboard</Link>
+            </NextLink>
+          </>
+        ) : (
+          <Button onClick={(e) => auth.signinWithGithub()}>Sign In</Button>
         )}
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      </Box>
+    </Flex>
+  );
 }
