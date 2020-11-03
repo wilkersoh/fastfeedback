@@ -5,9 +5,15 @@
       "@/components/*": [
         "components/*"
       ],
-      "@/lib/*": ["lib/*"],
-      "@/utils/*": ["utils/*"],
-      "@/styles/*": ["styles/*"]
+      "@/lib/*": [
+        "lib/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ]
     }
   }
 }
