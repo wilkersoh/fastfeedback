@@ -7,37 +7,37 @@ import { useAuth } from '@/lib/auth';
 import { getAllFeedback, getAllSites } from '@/lib/db-admin';
 import { createFeedback } from '@/lib/db';
 
-export async function getStaticProps(context) {
-  const siteId = context.params.siteId;
-  const { feedback } = await getAllFeedback(siteId);
+// export async function getStaticProps(context) {
+//   const siteId = context.params.siteId;
+//   const { feedback } = await getAllFeedback(siteId);
 
-  return {
-    props: {
-      initialFeedback: feedback
-    },
-    revalidate: 1 // every sec keep update if has new update
-  };
-}
+//   return {
+//     props: {
+//       initialFeedback: feedback
+//     },
+//     revalidate: 1 // every sec keep update if has new update
+//   };
+// }
 
-export async function getStaticPaths() {
-  const { sites } = await getAllSites();
-  const paths = sites.map((site) => ({
-    params: {
-      siteId: site.id.toString()
-    }
-  }));
+// export async function getStaticPaths() {
+//   const { sites } = await getAllSites();
+//   const paths = sites.map((site) => ({
+//     params: {
+//       siteId: site.id.toString()
+//     }
+//   }));
 
-  return {
-    paths,
-    fallback: false
-  };
-}
+//   return {
+//     paths,
+//     fallback: false
+//   };
+// }
 
 const SiteFeedback = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
-  const [allFeedback, setAllFeedback] = useState(initialFeedback);
+  // const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -51,8 +51,8 @@ const SiteFeedback = ({ initialFeedback }) => {
       status: 'pending'
     };
 
-    setAllFeedback([newFeedback, ...allFeedback]);
-    createFeedback(newFeedback);
+    // setAllFeedback([newFeedback, ...allFeedback]);
+    // createFeedback(newFeedback);
   };
 
   return (
@@ -72,9 +72,9 @@ const SiteFeedback = ({ initialFeedback }) => {
           </Button>
         </FormControl>
       </Box>
-      {allFeedback.map((feedback) => (
+      {/* {allFeedback.map((feedback) => (
         <Feedback key={feedback.id} {...feedback} />
-      ))}
+      ))} */}
     </Box>
   );
 };
