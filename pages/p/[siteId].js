@@ -7,37 +7,37 @@ import { useAuth } from '@/lib/auth';
 import { getAllFeedback, getAllSites } from '@/lib/db-admin';
 // import { createFeedback } from '@/lib/db';
 
-export async function getStaticProps(context) {
-  const siteId = context.params.siteId;
-  const { feedback } = await getAllFeedback(siteId);
+// export async function getStaticProps(context) {
+//   const siteId = context.params.siteId;
+//   const { feedback } = await getAllFeedback(siteId);
 
-  return {
-    props: {
-      initialFeedback: feedback
-    },
-    revalidate: 1 // every sec keep update if has new
-  };
-}
+//   return {
+//     props: {
+//       initialFeedback: feedback
+//     },
+//     revalidate: 1 // every sec keep update if has new
+//   };
+// }
 
-export async function getStaticPaths() {
-  const { sites } = await getAllSites();
-  const paths = sites.map((site) => ({
-    params: {
-      siteId: site.id.toString()
-    }
-  }));
+// export async function getStaticPaths() {
+//   const { sites } = await getAllSites();
+//   const paths = sites.map((site) => ({
+//     params: {
+//       siteId: site.id.toString()
+//     }
+//   }));
 
-  return {
-    paths,
-    fallback: false
-  };
-}
+//   return {
+//     paths,
+//     fallback: false
+//   };
+// }
 
 const FeedbackPage = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
-  const [allFeedback, setAllFeedback] = useState(initialFeedback);
+  // const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const FeedbackPage = ({ initialFeedback }) => {
       status: 'pending'
     };
 
-    setAllFeedback([newFeedback, ...allFeedback]);
+    // setAllFeedback([newFeedback, ...allFeedback]);
     // createFeedback(newFeedback);
   };
 
