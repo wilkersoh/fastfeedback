@@ -37,7 +37,7 @@ const SiteFeedback = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
-  // const [allFeedback, setAllFeedback] = useState(initialFeedback);
+  const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -51,8 +51,8 @@ const SiteFeedback = ({ initialFeedback }) => {
       status: 'pending'
     };
 
-    // setAllFeedback([newFeedback, ...allFeedback]);
-    // createFeedback(newFeedback);
+    setAllFeedback([newFeedback, ...allFeedback]);
+    createFeedback(newFeedback);
   };
 
   return (
@@ -72,9 +72,9 @@ const SiteFeedback = ({ initialFeedback }) => {
           </Button>
         </FormControl>
       </Box>
-      {/* {allFeedback.map((feedback) => (
+      {allFeedback.map((feedback) => (
         <Feedback key={feedback.id} {...feedback} />
-      ))} */}
+      ))}
     </Box>
   );
 };
