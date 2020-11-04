@@ -15,7 +15,7 @@ import AddSiteModal from './AddSiteModal';
 // import Footer from './Footer';
 
 const DashboardShell = ({ children }) => {
-  const { user } = useAuth();
+  const { user, signout } = useAuth();
 
   return (
     <Box backgroundColor="gray.100" h="100vh">
@@ -42,7 +42,7 @@ const DashboardShell = ({ children }) => {
                 <Icon name="logo" size="24px" mr={8} />
               </Link>
             </NextLink>
-            <NextLink href="/sites" passHref>
+            <NextLink href="/dashboard" passHref>
               <Link mr={4}>Sites</Link>
             </NextLink>
             <NextLink href="/feedback" passHref>
@@ -50,6 +50,9 @@ const DashboardShell = ({ children }) => {
             </NextLink>
           </Flex>
           <Flex justifyContent="center" alignItems="center">
+            <Button variant="ghost" mr={2} onClick={() => signout()}>
+              Logout
+            </Button>
             <NextLink href="/account" passHref>
               <Link>
                 <Avatar size="sm" src={user?.photoUrl} />
@@ -57,10 +60,6 @@ const DashboardShell = ({ children }) => {
             </NextLink>
           </Flex>
         </Flex>
-      </Flex>
-      <Flex justifyContent="space-between">
-        <Heading mb={8}>My Sites</Heading>
-        <AddSiteModal>Add Site</AddSiteModal>
       </Flex>
       <Flex margin="0 auto" direction="column" maxW="1250px" px={[0, 8, 8]}>
         {children}

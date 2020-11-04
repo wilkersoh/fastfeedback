@@ -15,7 +15,7 @@ export async function getStaticProps(context) {
     props: {
       initialFeedback: feedback
     },
-    revalidate: 1 // every sec keep update if has new update
+    revalidate: 1 // every sec keep update if has new
   };
 }
 
@@ -33,7 +33,7 @@ export async function getStaticPaths() {
   };
 }
 
-const SiteFeedback = ({ initialFeedback }) => {
+const FeedbackPage = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
@@ -79,4 +79,4 @@ const SiteFeedback = ({ initialFeedback }) => {
   );
 };
 
-export default SiteFeedback;
+export default FeedbackPage;

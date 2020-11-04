@@ -10,6 +10,7 @@ import {
   Icon,
   Heading,
   Flex,
+  Stack,
   Link
 } from '@chakra-ui/core';
 
@@ -46,7 +47,31 @@ export default function Home() {
             </NextLink>
           </>
         ) : (
-          <Button onClick={(e) => auth.signinWithGithub()}>Sign In</Button>
+          <Stack>
+            <Button
+              onClick={(e) => auth.signinWithGithub()}
+              leftIcon="github"
+              backgroundColor="gray.900"
+              color="white"
+              fontWeigh="medium"
+              _hover={{ bg: 'gray.700' }}
+              _active={{ bg: 'gray.800', transform: 'scale(0.95' }}
+            >
+              Sign in with Github
+            </Button>
+            <Button
+              onClick={(e) => auth.signinWithGoogle()}
+              leftIcon="google"
+              backgroundColor="white"
+              color="gray.900"
+              variant="outline"
+              fontWeigh="medium"
+              _hover={{ bg: 'gray.100' }}
+              _active={{ bg: 'gray.100', transform: 'scale(0.95' }}
+            >
+              Sign in with Google
+            </Button>
+          </Stack>
         )}
       </Box>
     </Flex>

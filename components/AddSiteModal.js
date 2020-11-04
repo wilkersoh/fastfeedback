@@ -45,13 +45,15 @@ const AddSiteModal = ({ children }) => {
       name,
       link
     };
-    createSite(newSite);
+    const { id } = createSite(newSite);
+    console.log(id);
+    console.log('check top');
     toastModal(toast, 'success');
     mutate(
       ['/api/sites', auth.user.token],
       async (data) => {
         // aysnc data 是 api return 的data
-        return { sites: [...data.sites, newSite] };
+        return { sites: [...data.sites, { id, ...newSite }] };
       },
       false // 它会直接拿cache里的 data， 然后 api 更新好了 他不会refresh
       /**
