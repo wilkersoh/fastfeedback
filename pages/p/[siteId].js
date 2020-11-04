@@ -5,7 +5,7 @@ import { Box, FormControl, FormLabel, Input, Button } from '@chakra-ui/core';
 import Feedback from '@/components/Feedback';
 import { useAuth } from '@/lib/auth';
 import { getAllFeedback, getAllSites } from '@/lib/db-admin';
-import { createFeedback } from '@/lib/db';
+// import { createFeedback } from '@/lib/db';
 
 export async function getStaticProps(context) {
   const siteId = context.params.siteId;
@@ -52,7 +52,7 @@ const FeedbackPage = ({ initialFeedback }) => {
     };
 
     setAllFeedback([newFeedback, ...allFeedback]);
-    createFeedback(newFeedback);
+    // createFeedback(newFeedback);
   };
 
   return (
