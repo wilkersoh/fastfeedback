@@ -5,39 +5,39 @@ import { Box, FormControl, FormLabel, Input, Button } from '@chakra-ui/core';
 import Feedback from '@/components/Feedback';
 import { useAuth } from '@/lib/auth';
 import { getAllFeedback, getAllSites } from '@/lib/db-admin';
-// import { createFeedback } from '@/lib/db';
+import { createFeedback } from '@/lib/db';
 
-// export async function getStaticProps(context) {
-//   const siteId = context.params.siteId;
-//   const { feedback } = await getAllFeedback(siteId);
+export async function getStaticProps(context) {
+  const siteId = context.params.siteId;
+  const { feedback } = await getAllFeedback(siteId);
 
-//   return {
-//     props: {
-//       initialFeedback: feedback
-//     },
-//     revalidate: 1 // every sec keep update if has new
-//   };
-// }
+  return {
+    props: {
+      initialFeedback: feedback
+    },
+    revalidate: 1 // every sec keep update if has new
+  };
+}
 
-// export async function getStaticPaths() {
-//   const { sites } = await getAllSites();
-//   const paths = sites.map((site) => ({
-//     params: {
-//       siteId: site.id.toString()
-//     }
-//   }));
+export async function getStaticPaths() {
+  const { sites } = await getAllSites();
+  const paths = sites.map((site) => ({
+    params: {
+      siteId: site.id.toString()
+    }
+  }));
 
-//   return {
-//     paths,
-//     fallback: false
-//   };
-// }
+  return {
+    paths,
+    fallback: true
+  };
+}
 
 const FeedbackPage = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
-  // const [allFeedback, setAllFeedback] = useState(initialFeedback);
+  const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,9 +50,9 @@ const FeedbackPage = ({ initialFeedback }) => {
       provider: auth.user.provider,
       status: 'pending'
     };
-
-    // setAllFeedback([newFeedback, ...allFeedback]);
-    // createFeedback(newFeedback);
+    const { id } = createFeedback(newFeedback);
+    inputEl.current.value = '';
+    setAllFeedback([{ id, ...newFeedback }, ...allFeedback]);
   };
 
   return (
@@ -67,14 +67,20 @@ const FeedbackPage = ({ initialFeedback }) => {
         <FormControl my={8}>
           <FormLabel htmlFor="comment">Comment</FormLabel>
           <Input ref={inputEl} type="comment" id="comment" />
-          <Button type="submit" fontWeight="medium" mt={2}>
+          <Button
+            type="submit"
+            fontWeight="medium"
+            mt={2}
+            isDisabled={router.isFallback}
+            // disable when button inside the fallback (fallback: true)
+          >
             Add Comment
           </Button>
         </FormControl>
       </Box>
-      {/* {allFeedback.map((feedback) => (
+      {allFeedback.map((feedback) => (
         <Feedback key={feedback.id} {...feedback} />
-      ))} */}
+      ))}
     </Box>
   );
 };
