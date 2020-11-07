@@ -3,6 +3,9 @@ import { AuthProvider } from '@/lib/auth';
 import { ThemeProvider, CSSReset } from '@chakra-ui/core';
 import { Global, css } from '@emotion/core';
 import theme from '@/styles/theme';
+import { DefaultSeo } from 'next-seo';
+
+import SEO from '../next-seo.config';
 
 const GlobalStyle = ({ children }) => {
   return (
@@ -34,6 +37,7 @@ function App({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
+        <DefaultSeo {...SEO} />
         <GlobalStyle />
         <Component {...pageProps} />
       </AuthProvider>

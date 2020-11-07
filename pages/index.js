@@ -28,8 +28,6 @@ export default function Home() {
         `
           }}
         />
-
-        <title>Fast Feedback</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
