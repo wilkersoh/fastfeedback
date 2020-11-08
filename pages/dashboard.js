@@ -18,7 +18,6 @@ export default function Dashboard() {
   const isPaidAccount = user?.stripeRole;
 
   if (!data) {
-    console.log('---render dashboard no data----'); // x3
     return (
       <DashboardShell>
         <SiteTableHeader />
@@ -28,7 +27,6 @@ export default function Dashboard() {
   }
 
   if (data.sites?.length) {
-    console.log('---render dashboard has data----'); // 1
     return (
       <DashboardShell>
         <SiteTableHeader isPaidAccount={isPaidAccount} />
@@ -37,7 +35,6 @@ export default function Dashboard() {
     );
   }
 
-  console.log('---render dashboard paid account----');
   return (
     <DashboardShell>
       <SiteTableHeader isPaidAccount={isPaidAccount} />
