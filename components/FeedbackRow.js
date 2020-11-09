@@ -2,27 +2,24 @@ import React, { useState, useEffect } from 'react';
 
 import { updateFeedback } from '@/lib/db';
 
-import { mutate } from 'swr';
+import { mutate, trigger } from 'swr';
 import { useAuth } from '@/lib/auth';
 
 import { Box, Code, Switch, IconButton } from '@chakra-ui/core';
 import { Td } from './Table';
 
 import RemoveButton from '@/components/RemoveButton';
+import { useRef } from 'react';
 
 const FeedbackRow = ({ id, author, text, route, status }) => {
   const auth = useAuth();
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(status === 'active');
 
-  useEffect(() => {
-    updateFeedback(id, { status: checked ? 'active' : 'pending' });
-    console.log(checked);
-    mutate(['/api/feedback', auth.user.token]);
-  }, [setChecked]);
-
-  const toggleFeedback = (e) => {
+  const toggleFeedback = async (e) => {
     setChecked(!checked);
-    // updateFeedback(id, { status: checked ? 'pending' : 'active' });
+    await updateFeedback(id, { status: !checked ? 'active' : 'pending' });
+    // trigger(['/api/feedback', auth.user.token]); // can get latest cache data. but not apply into dom yet
+    mutate(['/api/feedback', auth.user.token]); // mutate is mutating the cache first then after go to the server then update your cache, not in this use case
   };
   console.log('----render in feedbackRow---');
   return (
@@ -36,7 +33,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
         <Switch
           variantColor="green"
           onChange={toggleFeedback}
-          defaultIsChecked={status === 'active'}
+          defaultIsChecked={status == 'active'}
           size="md"
         />
       </Td>

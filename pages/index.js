@@ -19,15 +19,15 @@ export default function Home() {
   return (
     <Flex as="main" m="auto">
       <Head>
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
           if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
-            window.location.href = "/dashboard"
+            window.location.href = "/site"
           }
         `
           }}
-        />
+        /> */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -40,7 +40,7 @@ export default function Home() {
         {auth.user ? (
           <>
             <Button onClick={(e) => auth.signout()}>Sign Out</Button>
-            <NextLink href="/dashboard" passHref>
+            <NextLink href="/site" passHref>
               <Link>View Dashboard</Link>
             </NextLink>
           </>

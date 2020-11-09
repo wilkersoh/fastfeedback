@@ -57,10 +57,11 @@ const AddSiteModal = ({ children }) => {
       /**
         Flow:
         1. 用 cache的data
-        2. user create 新的site了 它会call api 去 update database
-        3. 它还会把 这个data 加 进去 cache data 那边 然后直接显示在 screen(所以看到的data其实是 cache data 而不是 database，除非user refresh)
-        4. false - 是说 database data更改了 页面不会 更新， 如果没有设置 当database被更改了 他也会自动更新
-        5. 因为 使用cache的data 所以不必要 自动更新
+        2. user create 新的site了 so database 有新的 data了
+        3. mutate 是 cache的方面的东西 然后它会去 database 拿 新的data
+        4. 它还会把 这个data 加 进去 cache data 那边 然后直接显示在 screen(所以看到的data其实是 cache data 而不是 database，除非user refresh)
+        5. false - 是说 database data更改了 页面不会 更新， 如果没有设置 当database被更改了 他也会自动更新
+        6. 因为 使用cache的data 所以不必要 自动更新
        */
     );
     onClose();

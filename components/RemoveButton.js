@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { mutate } from 'swr';
+import { mutate, trigger } from 'swr';
 import { useAuth } from '@/lib/auth';
 import {
   AlertDialog,
@@ -35,6 +35,7 @@ const RemoveButton = ({ feedbackId }) => {
       false
     );
     onClose();
+    // trigger(['/api/feedback', auth.user.token]);
   };
 
   return (

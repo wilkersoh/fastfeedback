@@ -11,7 +11,6 @@ import {
 import AddSiteModal from './AddSiteModal';
 
 const SiteTableHeader = ({ isPaidAccount }) => {
-  console.log(isPaidAccount);
   return (
     <Box mx={4}>
       <Breadcrumb>

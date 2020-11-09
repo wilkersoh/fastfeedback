@@ -1,4 +1,6 @@
 import React from 'react';
+import NextLink from 'next/link';
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,11 +12,16 @@ import {
 
 import AddSiteModal from './AddSiteModal';
 
-const SiteTableHeader = ({ isPaidAccount }) => (
+const FeedbackTableHeader = ({ isPaidAccount, siteName }) => (
   <Box mx={4}>
     <Breadcrumb>
       <BreadcrumbItem>
-        <BreadcrumbLink>Feedback</BreadcrumbLink>
+        <NextLink href="/feedback" passHref>
+          <BreadcrumbLink>Feedback</BreadcrumbLink>
+        </NextLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink>{siteName}</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
     <Flex justifyContent="space-between">
@@ -24,4 +31,4 @@ const SiteTableHeader = ({ isPaidAccount }) => (
   </Box>
 );
 
-export default SiteTableHeader;
+export default FeedbackTableHeader;
